@@ -9,6 +9,7 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     DbModel db = new DbModel();
+    
 
     public HomeController(ILogger<HomeController> logger)
     {
@@ -31,6 +32,7 @@ public class HomeController : Controller
 
         List<ClienteModel> clientes = db.getDateCliente().FindAll(x => x.Id != Id);
         List<PedidoModel> pedidos = db.getDatepedidos(clientes).FindAll(x=> x.Numero != Numero);
+        DbModel.GetCadete1();
 
         db.deletePedido(pedidos);
         db.deleteCliente(clientes);

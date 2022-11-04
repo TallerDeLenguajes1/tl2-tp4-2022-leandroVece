@@ -1,0 +1,3 @@
+select * from cadetes 
+Inner Join cadetePedido using (id_cadete)
+inner Join pedidos using (id_pedido);

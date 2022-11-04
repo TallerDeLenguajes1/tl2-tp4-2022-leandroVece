@@ -1,4 +1,5 @@
 
+using System.Data.SQLite;
 namespace cadeteria.Models;
 
 public class DbModel
@@ -12,6 +13,28 @@ public class DbModel
          public DbModel(){
                 ListaPedido = new List<PedidoModel>();
                 Cadeteria = new CadeteriaModel("Eternos","6542112");
+        }
+
+        public static void GetCadete1(){
+
+            var cadenaConexion = @"Data Source = cadeteria.db;version=3";
+            var conection = new SQLiteConnection(cadenaConexion);
+
+            conection.Open();
+
+            var queryString = "Select nombre From cadetes";
+            var comando = new SQLiteCommand(queryString,conection);
+            List<string> lista = new List<string>();
+            using (var rader = comando.ExecuteReader())
+            {
+                while (rader.Read())
+                {
+                    lista.Add(rader.GetString(0));
+                    Console.WriteLine(rader.GetString(0));
+                }
+                conection.Close();
+            }
+
         }
 
 
